@@ -56,7 +56,8 @@ namespace Trinder.API.Controllers
 
             data.ConferenceRoomName = reservationSlot.ConferenceRoomName;
             data.ConferenceRoomNumber = reservationSlot.ConferenceRoomNumber;
-            data.Time = reservationSlot.Time;
+            data.StartTime = reservationSlot.StartTime;
+            data.EndTime = reservationSlot.EndTime;
             _context.ReservationSlots.Update(data);
             await _context.SaveChangesAsync();
 

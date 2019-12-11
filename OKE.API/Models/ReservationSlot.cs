@@ -10,6 +10,8 @@ namespace OKE.Api.Models
 
         public string ConferenceRoomName { get; set; }
 
-        public DateTime Time {get; set; }
+        public DateTime StartTime {get; set; }
+
+        public DateTime EndTime {get; set; }
     }
 }

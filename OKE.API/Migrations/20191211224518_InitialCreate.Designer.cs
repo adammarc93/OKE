@@ -9,8 +9,8 @@ using OKE.Api.Data;
 namespace OKE.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191211133154_InitialCreateDB")]
-    partial class InitialCreateDB
+    [Migration("20191211224518_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,7 +50,10 @@ namespace OKE.API.Migrations
                     b.Property<int>("ConferenceRoomNumber")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Time")
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartTime")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

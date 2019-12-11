@@ -48,7 +48,10 @@ namespace OKE.API.Migrations
                     b.Property<int>("ConferenceRoomNumber")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Time")
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartTime")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

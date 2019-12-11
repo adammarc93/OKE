@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OKE.API.Migrations
 {
-    public partial class InitialCreateDB : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,8 @@ namespace OKE.API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ConferenceRoomNumber = table.Column<int>(nullable: false),
                     ConferenceRoomName = table.Column<string>(nullable: true),
-                    Time = table.Column<DateTime>(nullable: false)
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
