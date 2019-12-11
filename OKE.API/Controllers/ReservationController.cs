@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 using OKE.Api.Data;
 using OKE.Api.Models;
 using OKE.API.Models;
@@ -22,34 +22,34 @@ namespace Trinder.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetReservations()
+        public async Task<IActionResult> GetReservations()
         {
-            var reservation = _context.Reservations.ToList();
+            var reservation = await _context.Reservations.ToListAsync();
 
             return Ok(reservation);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetReservation(int id)
+        public async Task<IActionResult> GetReservation(int id)
         {
-            var reservation = _context.Reservations.FirstOrDefault(x => x.Id == id);
+            var reservation = await _context.Reservations.FirstOrDefaultAsync(x => x.Id == id);
 
             return Ok(reservation);
         }
 
         [HttpPost]
-        public IActionResult AddReservation([FromBody] Reservation reservation)
+        public async Task<IActionResult> AddReservation([FromBody] Reservation reservation)
         {
             _context.Reservations.Add(reservation);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(reservation);
         }
 
         [HttpPut("{id}")]
-        public IActionResult EditReservation(int id, [FromBody] Reservation reservation)
+        public async Task<IActionResult> EditReservation(int id, [FromBody] Reservation reservation)
         {
-            var data = _context.Reservations.Find(id);
+            var data = await _context.Reservations.FindAsync(id);
 
             if(data == null)
             {
@@ -60,15 +60,15 @@ namespace Trinder.API.Controllers
             data.UserLastName = reservation.UserLastName;
             data.ReservationSlotId = reservation.ReservationSlotId;
             _context.Reservations.Update(data);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(data);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteReservation(int id)
+        public async Task<IActionResult> DeleteReservation(int id)
         {
-            var data = _context.Reservations.Find(id);
+            var data = await _context.Reservations.FindAsync(id);
 
             if(data == null)
             {
@@ -76,7 +76,7 @@ namespace Trinder.API.Controllers
             }
 
             _context.Reservations.Remove(data);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(data);
         }
