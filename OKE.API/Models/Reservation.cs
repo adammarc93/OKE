@@ -1,7 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-    
-using OKE.Api.Models;
-
 namespace OKE.API.Models
 {
     public class Reservation
