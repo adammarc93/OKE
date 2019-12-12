@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,15 @@ namespace Trinder.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReservationSlot([FromBody] ReservationSlot reservationSlot)
         {
+            var freeSlots = _context.ReservationSlots.Where(x => x.ConferenceRoomNumber == reservationSlot.ConferenceRoomNumber).Select(x => x)
+                .Where(x => (x.StartTime >= reservationSlot.EndTime) && (x.EndTime <= reservationSlot.StartTime)).Select(x => x)
+                .ToList().Count();
+
+            if(freeSlots == 0)
+            {
+                return NoContent();
+            }
+
             _context.ReservationSlots.Add(reservationSlot);
             await _context.SaveChangesAsync();
 
